@@ -1,32 +1,21 @@
-<?php include_once('lib/head.php');
-#session_start();
+<?php include_once('lib/head.php');?>
 
-if(isset($_SESSION['loggedInAdmin']) && !empty($_SESSION['loggedInAdmin'])){
-  header("Location: admin_dashboard.php");
-}
-?>
 
-<?php
-//insert navigation bar
-include_once('lib/nav.php');
-?>
-
-<p>
-  <strong>
-    You are here, please register.
-  </strong>
-</p><hr/>
+   <h3>
+	 Book an appointment with a specialist.
+	 </h3><hr/>
 <p>All required fields must be appropriately filled.</p>
 
 <!--form start-->
-<form method="POST" action="processadmin.php">
+<form method="POST" action="processregister.php">
+
 
   <p>
     <?php
     if(isset($_SESSION['error']) && !empty ($_SESSION['error'])) {
       echo "<span style='color: red'>" .$_SESSION['error']."</span>";
-      
-     #clear session error log 
+
+     #clear session error log
       session_unset();
     }
     ?>
@@ -60,20 +49,25 @@ include_once('lib/nav.php');
     </select>
   </p>
   <p>
-    <label for="designation">Designation</label><br/>
-     <select name="designation" required>
-       <option selected>Select one</option>
-       <option <?php if(isset($_SESSION['designation'])){
-        echo "value=" .$_SESSION['designation'];
-      } ?>>Admin</option>
-     </select>
+	<label for="date">Select Date</label><br/>
+	<input type="date" name="date" required/>
+	</p>
+ <p>
+	<label for="time">Select Time</label><br/>
+	<input type="time" name="time" required/>
+	</p>
+ <p>
+	<label for="message">Leave message</label><br/>
+	<textarea type="text" name="message">put your message here...</textarea>
+	</p>
+  <p>
+    <label for="department">Department</label><br/>
+     <input type="text" name="department"/>
   </p>
   <p>
-    <button type="submit" name="submit">Register</button>
+    <button type="submit" name="submit">Book</button>
   </p>
 </form>
 
-<?php
-//insert footer 
-require('lib/footer.php')
-?>
+
+<?php include_once('lib/footer.php');?>
